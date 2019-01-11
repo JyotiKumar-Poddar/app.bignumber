@@ -1,3 +1,23 @@
+spring:
+  application:
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: info
+    web:
+      base-path: /app-status
+  server:
+    port: 8099
+info:
+  app:
+    name: Next big number application
+
 api:
+  no-response: "No answer"
   welcome-message: "Welcome ....!"
+  input-number:
+    max-range:  9223372036854775807
+    min-range:  0
+
 
