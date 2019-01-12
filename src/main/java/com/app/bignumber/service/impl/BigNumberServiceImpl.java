@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service that help in filting
+ */
 @Service
 @Slf4j
 public class BigNumberServiceImpl implements BigNumberService {
@@ -42,6 +45,7 @@ public class BigNumberServiceImpl implements BigNumberService {
 
     @Override
     public boolean filterInputRequest(final String number) {
+        // check for palindrome
         boolean isNextBigNumberNotPossible = false;
         int pivot = bigNumberConverterUtil.findPivot(number);
         if (pivot == -1) {

@@ -7,12 +7,15 @@ package com.app.bignumber.util;
  */
 public class BigNumberConverterUtil {
 
-    public long  nextBigNumber(final String number) {
+    public long nextBigNumber(final String number) {
         final char[] digits = number.toCharArray();
-        int m = findPivot(number);
+        final int m = findPivot(number);
+        if (m == -1) {
+            return -1;
+        }
         int n = -1;
-        int numberLength = digits.length;
-        int pivotDigit = digits[m];
+        final int numberLength = digits.length;
+        final int pivotDigit = digits[m];
         for (int i = numberLength - 1; i > m; i--) {
             if (digits[i] > pivotDigit) {
                 n = i;
@@ -48,7 +51,7 @@ public class BigNumberConverterUtil {
         return pivot;
     }
 
-    private void reverseSubArray(char[] nums, int start, int end) {
+    private void reverseSubArray(final char[] nums, int start, int end) {
         while (start < end) {
             swapDigits(nums, start, end);
             start++;
@@ -57,7 +60,7 @@ public class BigNumberConverterUtil {
     }
 
     private void swapDigits(final char[] digits, final int i, final int j) {
-        char tempDigit = digits[i];
+        final char tempDigit = digits[i];
         digits[i] = digits[j];
         digits[j] = tempDigit;
     }
