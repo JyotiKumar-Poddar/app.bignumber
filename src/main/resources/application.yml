@@ -5,10 +5,6 @@ management:
     jmx:
       exposure:
         include: info
-    web:
-      base-path: /app-status
-  server:
-    port: 8099
 info:
   app:
     name: Next big number application
