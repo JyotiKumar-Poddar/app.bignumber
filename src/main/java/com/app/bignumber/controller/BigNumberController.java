@@ -3,6 +3,7 @@ package com.app.bignumber.controller;
 import com.app.bignumber.service.BigNumberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class BigNumberController {
 
+
+    @Value("${api.no-response}")
+    private String noResponse;
 
     private final BigNumberService bigNumberService;
 
@@ -32,7 +36,7 @@ public class BigNumberController {
         final String numberAsString = String.valueOf(number);
         // pass only valid request
         if (bigNumberService.filterInputRequest(numberAsString)) {
-            response = ResponseEntity.ok("No Answer");
+            response = ResponseEntity.ok(noResponse);
         } else if (bigNumberService.isValidNumberRange(number)) {
             bigNumberModal = bigNumberService.getNextBigNumber(numberAsString);
             response = ResponseEntity.ok(bigNumberModal);

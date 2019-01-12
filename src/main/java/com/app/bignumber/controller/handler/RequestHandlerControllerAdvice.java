@@ -18,7 +18,7 @@ public class RequestHandlerControllerAdvice {
 
     @ExceptionHandler({NumberFormatException.class, InvalidRangeException.class})
     @ResponseStatus(BAD_REQUEST)
-    public void handleInValidRequestException(final HttpServletRequest request, final Exception ex) {
+    public void handleInValidRequestException(final HttpServletRequest request) {
         log.severe("Request URI is  " + request.getRequestURI());
     }
 
