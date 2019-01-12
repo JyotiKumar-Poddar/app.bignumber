@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.mockito.hamcrest.MockitoHamcrest.intThat;
@@ -63,6 +64,6 @@ public class BigNumberServiceImplTest {
         when(bigNumberConverterUtil.findPivot("111")).thenReturn(-1);
         assertTrue(bigNumberService.filterInputRequest("111"));
         when(bigNumberConverterUtil.findPivot("123")).thenReturn(intThat(greaterThan(0)));
-        assertTrue( bigNumberService.filterInputRequest("123"));
+        assertFalse( bigNumberService.filterInputRequest("123"));
     }
 }
