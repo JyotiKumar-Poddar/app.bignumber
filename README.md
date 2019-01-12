@@ -23,5 +23,9 @@ Alternatively you can use the [Spring Boot Gradle plugin](https://docs.spring.io
 ```shell
 gradle bootRun
 ```
+## Application deployed on heroku
 
+Status check: https://app-nextbignumber.herokuapp.com/actuator
 
+GET https://app-nextbignumber.herokuapp.com/api/nextbignumber/1111 -> No Answer
+GET https://app-nextbignumber.herokuapp.com/api/nextbignumber/1234 -> 1243
