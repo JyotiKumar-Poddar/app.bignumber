@@ -37,7 +37,7 @@ public class BigNumberServiceImpl implements BigNumberService {
     @Override
     public boolean isValidNumberRange(final Long number) {
         // check for valid range
-        if (number <= min_range && number >= max_range) {
+        if (number < min_range || number > max_range) {
             throw new InvalidRangeException("Invalid range exception");
         }
         return true;
@@ -47,7 +47,7 @@ public class BigNumberServiceImpl implements BigNumberService {
     public boolean filterInputRequest(final String number) {
         // check for palindrome
         boolean isNextBigNumberNotPossible = false;
-        int pivot = bigNumberConverterUtil.findPivot(number);
+        final int pivot = bigNumberConverterUtil.findPivot(number);
         if (pivot == -1) {
             isNextBigNumberNotPossible = true;
         }

@@ -1,5 +1,6 @@
 package com.app.bignumber.service.impl;
 
+import com.app.bignumber.exception.InvalidRangeException;
 import com.app.bignumber.service.BigNumberService;
 import com.app.bignumber.util.BigNumberConverterUtil;
 import org.junit.Before;
@@ -12,8 +13,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import static org.mockito.hamcrest.MockitoHamcrest.intThat;
 
 @SpringBootTest(classes = {TestConfiguration.class})
 @RunWith(SpringRunner.class)
@@ -31,7 +35,7 @@ public class BigNumberServiceImplTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
         bigNumberService =
                 new BigNumberServiceImpl(bigNumberConverterUtil, min_range, max_range);
     }
@@ -46,17 +50,19 @@ public class BigNumberServiceImplTest {
 
     @Test
     public void isValidNumberRange() {
-        when(bigNumberService.isValidNumberRange(0l)).thenReturn(true);
-        assertEquals(true, bigNumberService.isValidNumberRange(0l));
-        when(bigNumberService.isValidNumberRange(-1001l)).thenReturn(false);
-        assertEquals(false, bigNumberService.isValidNumberRange(0l));
+        assertTrue( bigNumberService.isValidNumberRange(1L));
+    }
+
+    @Test(expected = InvalidRangeException.class)
+    public void isValidNumberRangeException() {
+        bigNumberService.isValidNumberRange(-1L);
     }
 
     @Test
     public void filterInputRequest() {
-        when(bigNumberService.filterInputRequest("111")).thenReturn(false);
-        assertEquals(false, bigNumberService.filterInputRequest("111"));
-        when(bigNumberService.filterInputRequest("1234")).thenReturn(true);
-        assertEquals(true, bigNumberService.filterInputRequest("1234"));
+        when(bigNumberConverterUtil.findPivot("111")).thenReturn(-1);
+        assertTrue(bigNumberService.filterInputRequest("111"));
+        when(bigNumberConverterUtil.findPivot("123")).thenReturn(intThat(greaterThan(0)));
+        assertTrue( bigNumberService.filterInputRequest("123"));
     }
 }

@@ -13,7 +13,7 @@ public interface BigNumberService {
     /**
      * Method to valid the number is in expected range
      *
-     * @param number
+     * @param number  of {@link  Long}
      * @return true else  throw  exception {@link com.app.bignumber.exception.InvalidRangeException}
      */
     boolean isValidNumberRange(Long number);
@@ -21,7 +21,7 @@ public interface BigNumberService {
     /**
      *
      * @param number number to find the pivot {@link Integer}
-     * @return  false incase
+     * @return  false if the next number generation is not possible
      */
     boolean filterInputRequest(String number);
 
