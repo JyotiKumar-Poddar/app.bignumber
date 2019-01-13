@@ -7,8 +7,8 @@ respond should be “No answer”.
 
 The API endpoints:
 
-GET /api/nextbignumber/{number} – returns the next big Number
-
+GET /api/nextbignumber/{number} – returns the next big Number if the next big number generation is not possible it will return "No Answer"
+the valid ragne of input is in between 0, 9223372036854775807
 ## Requirements
 
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
